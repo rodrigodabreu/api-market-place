@@ -16,6 +16,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -74,10 +76,6 @@ class CadastroProdutoUseCaseTest {
     @Nested
     class Falha {
 
-      @BeforeEach
-      void beforeEach() {
-      }
-
       @DisplayName("Dado um produto com o nome começando com -")
       @Test
       void teste1() {
@@ -92,6 +90,24 @@ class CadastroProdutoUseCaseTest {
 
         //then
         assertThat(resultado).hasMessage("O nome do produto não pode iniciar com -");
+      }
+
+      //utilizando testes parametrizados
+      @DisplayName("Dado um produto com um campo status igual a ${status}")
+      @ParameterizedTest
+      @EnumSource(Produto.Status.class)
+      void teste2(Produto.Status status){
+        //given
+        var produto = Produto.builder()
+            .nome("- Produto 1")
+            .build();
+
+        //when
+        var resultado = useCase.cadastrar(produto);
+
+        //then
+        assertThat(resultado.getStatus()).isEqualTo(status);
+
       }
     }
   }
