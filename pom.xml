@@ -22,6 +22,9 @@
     <spring-cloud-aws.version>3.1.1</spring-cloud-aws.version>
     <mapstruct.version>1.6.3</mapstruct.version>
     <openapi.version>2.6.0</openapi.version>
+    <!-- Byte Buddy atualizado para suportar Java 25 -->
+    <byte-buddy.version>1.15.11</byte-buddy.version>
+    <mockito.version>5.15.2</mockito.version>
   </properties>
 
   <modules>
@@ -47,6 +50,25 @@
         <version>${spring-cloud-aws.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <!-- Força versões compatíveis com Java 25 -->
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito.version}</version>
       </dependency>
 
       <dependency>
