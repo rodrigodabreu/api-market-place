@@ -1,10 +1,10 @@
 package br.com.alura.marketplace.infra.repository;
 
+import static br.com.alura.marketplace.infra.entity.factory.ProdutoFactory.criarProduto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import br.com.alura.marketplace.domain.entity.Produto;
 import br.com.alura.marketplace.infra.config.JpaConfig;
-import java.math.BigDecimal;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -39,13 +39,7 @@ class ProdutoRepositoryExtTest {
       void deveBuscarProdutoPorNomeComSucesso() {
         //given
         String nome = "Produto Teste";
-        Produto produto = Produto.builder()
-            .nome(nome)
-            .categoria("Categoria Teste")
-            .status(Produto.Status.AVAILABLE)
-            .descricao("Descrição do produto de teste")
-            .valor(BigDecimal.valueOf(99.99))
-            .build();
+        Produto produto = criarProduto().comNome(nome);
 
         repository.save(produto);
         entityManager.flush();
