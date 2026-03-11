@@ -4,6 +4,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 import br.com.alura.marketplace.application.v1.dto.ProdutoDto;
 import br.com.alura.marketplace.domain.entity.Produto.Status;
+import java.math.BigDecimal;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,8 @@ public final class ProdutoDtoFactory {
           .nome("Produto 1")
           .descricao("Descrição Produto 1")
           .status(Status.AVAILABLE)
+          .categoria("Banho e tosa")
+          .valor(BigDecimal.valueOf(50L))
           .build();
     }
   }

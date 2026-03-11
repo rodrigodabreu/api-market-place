@@ -31,8 +31,9 @@ public class CadastroProdutoUseCase {
           .forEach(bucketRepository::armazenar);
     }
 
-    return Produto.builder().build();
-//    var produtoPetCadastrado = petStoreRepository.cadastrarPet(produto);
+
+    var produtoPetCadastrado = petStoreRepository.cadastrarPet(produto);
+    return produtoPetCadastrado;
 //
 //    produto.atualizar(produtoPetCadastrado);
 //
