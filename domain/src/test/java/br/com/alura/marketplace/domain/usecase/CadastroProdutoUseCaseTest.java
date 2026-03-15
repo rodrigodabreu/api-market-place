@@ -70,6 +70,28 @@ class CadastroProdutoUseCaseTest {
         assertThat(resultado.getProdutoId()).isEqualTo(java.util.UUID.fromString(UUID));
       }
 
+      //utilizando testes parametrizados para validar diferentes status
+      @DisplayName("Dado um produto sendo cadastrado, então deve ter status AVAILABLE")
+      @Test
+      void teste2() {
+        //given
+        var produto = Produto.builder()
+            .nome("Produto 1")
+            .categoria("Categoria 1")
+            .descricao("Descrição do produto")
+            .valor(java.math.BigDecimal.valueOf(100.00))
+            .status(Produto.Status.AVAILABLE)
+            .build();
+
+        //when
+        var resultado = useCase.cadastrar(produto);
+
+        //then
+        assertThat(resultado).isNotNull();
+        assertThat(resultado.getProdutoId()).isEqualTo(java.util.UUID.fromString(UUID));
+        assertThat(resultado.getStatus()).isEqualTo(Produto.Status.AVAILABLE);
+      }
+
     }
 
     @DisplayName("Então deve retornar erro")
@@ -90,24 +112,6 @@ class CadastroProdutoUseCaseTest {
 
         //then
         assertThat(resultado).hasMessage("O nome do produto não pode iniciar com -");
-      }
-
-      //utilizando testes parametrizados
-      @DisplayName("Dado um produto com um campo status igual a ${status}")
-      @ParameterizedTest
-      @EnumSource(Produto.Status.class)
-      void teste2(Produto.Status status){
-        //given
-        var produto = Produto.builder()
-            .nome("- Produto 1")
-            .build();
-
-        //when
-        var resultado = useCase.cadastrar(produto);
-
-        //then
-        assertThat(resultado.getStatus()).isEqualTo(status);
-
       }
     }
   }
