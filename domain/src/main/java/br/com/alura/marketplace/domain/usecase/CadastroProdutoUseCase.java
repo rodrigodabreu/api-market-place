@@ -11,6 +11,7 @@ import br.com.alura.marketplace.domain.repository.QueueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @RequiredArgsConstructor
 @Service
 public class CadastroProdutoUseCase {
@@ -22,9 +23,9 @@ public class CadastroProdutoUseCase {
 
   public Produto cadastrar(Produto produto) {
     validate(produto);
-
-    if(produto.getNome().startsWith("-"))
+    if (produto.getNome().startsWith("-")) {
       throw new BusinessException("O nome do produto não pode iniciar com -");
+    }
 
     if (!produto.getFotos().isEmpty()) {
       produto.getFotos()
@@ -37,7 +38,7 @@ public class CadastroProdutoUseCase {
 
     var produtoSalvo = produtoRepository.save(produto);
 
-//    queueRepository.notificarCadastro(produtoSalvo);
+    queueRepository.notificarCadastro(produtoSalvo);
 
     return produtoSalvo;
   }

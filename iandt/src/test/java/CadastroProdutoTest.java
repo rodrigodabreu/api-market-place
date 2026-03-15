@@ -5,6 +5,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import br.com.alura.marketplace.application.Application;
 import br.com.alura.marketplace.domain.setup.LocalStackSetup;
 import br.com.alura.marketplace.domain.setup.PostgresSetup;
+import br.com.alura.marketplace.domain.setup.RabbitMqSetup;
 import br.com.alura.marketplace.domain.setup.WireMockSetup;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +29,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = Application.class)//essa configuração de contexto se faz necessária por se tratar de um projeto modular. Em aplicaçõe não modulares não é necessário configurar.
 @Testcontainers
-public class CadastroProdutoTest implements LocalStackSetup, WireMockSetup, PostgresSetup {
+public class CadastroProdutoTest implements LocalStackSetup, WireMockSetup, PostgresSetup, RabbitMqSetup {
 
   @LocalServerPort
   Integer port;

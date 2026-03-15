@@ -69,6 +69,27 @@ docker run -d -p 8080:8080 --name=api-market-place rodsordi/api-market-place:mas
 
 - [SemVer](https://semver.org/lang/pt-BR/)
 
+## Demais anotações do projeto
+
+### Teste Container RabbitMQ
+
+Para validar a questão da publicação da mensagem no tópico existente/criado
+pode se valor da seguinte estratégia:
+
+- Após o teste de integração com o teste containter ter sido inicializado
+teremos uma versão do docker rodando as imagens, dentre elas o rabbitmq,
+então é possível consultarmos qual a porta que o console do rabbitmq subiu
+e acessar através do navegador localhost:${porta_rabbitmq}
+
+Para descobrir a porta que o rabbitmq está rodando devemos rodar o seguinte comando:
+`docker ps -a`
+com isso será listado os containers docker que está sendo executados.
+
+no meu caso aqui a porta utilizada para o rabbitmq foi **59624**:
+
+![img.png](img.png)
+
 ## ✒ Autores
 
-- [Rodrigo de Sordi](https://github.com/rodsordi)
+- [Rodrigo Abreu](https://github.com/rodrigodabreu)
+
