@@ -4,14 +4,14 @@ import static com.github.tomakehurst.wiremock.client.WireMock.post;
 
 import br.com.alura.marketplace.application.Application;
 import br.com.alura.marketplace.domain.setup.LocalStackSetup;
+import br.com.alura.marketplace.domain.setup.PostgresSetup;
 import br.com.alura.marketplace.domain.setup.WireMockSetup;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.petstore.model.PetDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import java.util.Arrays;
+import java.util.Collections;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = Application.class)//essa configuração de contexto se faz necessária por se tratar de um projeto modular. Em aplicaçõe não modulares não é necessário configurar.
 @Testcontainers
-public class CadastroProdutoTest implements LocalStackSetup, WireMockSetup {
+public class CadastroProdutoTest implements LocalStackSetup, WireMockSetup, PostgresSetup {
 
   @LocalServerPort
   Integer port;
@@ -50,7 +50,7 @@ public class CadastroProdutoTest implements LocalStackSetup, WireMockSetup {
 
       @BeforeEach
       void beforeEach() throws JsonProcessingException {
-        var petDto = new PetDto("name of my pet", Arrays.asList());
+        var petDto = new PetDto("name of my pet", Collections.emptyList());
         WIRE_MOCK.stubFor(post("/petstore/pet")
             .willReturn(aResponse()
                 .withStatus(200)

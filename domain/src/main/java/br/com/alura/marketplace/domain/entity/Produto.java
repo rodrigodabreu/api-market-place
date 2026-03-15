@@ -29,7 +29,7 @@ import static lombok.AccessLevel.PRIVATE;
 public class Produto implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID produtoId;
 
     @Column(nullable = false)
